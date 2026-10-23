@@ -28,6 +28,11 @@ connectDB().catch((err) => {
 const app = express();
 
 app.use(cors());
+// Code-10 bug: custom header restricts allowed methods to GET and POST, breaking PUT/DELETE CORS preflights
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Methods", "GET, POST");
+//   next();
+// }); // fixed
 app.use(express.json());
 
 // Middleware to ensure DB connection before handling requests
